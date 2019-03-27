@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> 
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <render-component></render-component>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '.app',
+            components: {
+                'render-component': {
+                    // render: function(createElement){
+                    //    var doFunc = function(){
+                    //        return {
+                    //            template: '<h1>hhh</h1>'
+                    //        }
+                    //    }
+                    //    return createElement(doFunc())
+                    // }
+                    render: function(createElement){
+                        return createElement('div',[
+                            createElement('span',
+                            {
+                                style:{
+                                    color: 'red',
+                                    fontSize: '20px'
+                                },
+                            },'hhhhhh'),
+                            createElement('span',
+                            {
+                                style: {
+                                    color: 'blue',
+                                    fontSize: '30px'
+                                },
+                            },'xxxxxx')
+                        ])
+
+                    }
+                }
+            }
+
+        })
+    </script>
+    
+</body>
+</html>

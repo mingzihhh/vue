@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="demo">
+        {{text}}<br>
+        {{reverseText}}<br>
+        {{reverseStr()}}<br>
+        {{fullName}}<br>
+        {{addPackage}}<br>
+        {{now}}<br>
+        {{thisTime()}}
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '.demo',
+            data: {
+                text: '123,456,789',
+                firstName: 'Jay',
+                lastName: 'Zhou',
+                //计算两个购物车总价
+                package1: [
+                    { name: 'iphone', price: '5999', count:' 2'},
+                    { name: 'ipad', price: '6999', count: '1'}
+                ],
+                package2:[
+                    { name: 'iphone', price: '4999', count: '1'},
+                ]
+
+            },
+            computed: {
+                reverseText: function(){
+                    return this.text.split(',').reverse().join(',')
+                },
+                fullName: {
+                    get: function () {
+                         return this.fullName = this.firstName + this.lastName
+                    },
+                    set: function(value) {
+                        var name = value.split(' ')
+                        this.firstName = name[0]
+                        this.lastName = name[1]
+                    }
+                },
+                addPackage: function(){
+                    var prices = 0
+                    for(var i = 0; i < this.package1.length; i++){
+                        prices += this.package1[i].price * this.package1[i].count
+                    }
+                    for (var j = 0; j < this.package2.length; j++) {
+                        prices += this.package2[j].price * this.package2[j].count
+                    }
+                    return prices
+                },
+                now: function(){
+                    return Date.now()
+                }
+
+
+            },
+            methods: {
+                thisTime : function(){
+                    return Date.now()
+                },
+                reverseStr: function(){
+                     return this.text.split(',').reverse().join(',')
+                }
+            }
+        })
+        // var app2 = new Vue({
+        //     el: '.demo',
+        //     data: {
+        //         firstName:'Jay',
+        //         lastName: 'Zhou',
+        //         fullName:'123'
+        //     },
+        //     computed: {
+        //         concatName: function(){
+        //             return this.fullName = this.firstName + this.lastName
+        //         }
+        //     }
+        // })
+    </script>
+</body>
+</html>

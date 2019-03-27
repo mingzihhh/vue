@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 过滤器 -->
+        {{date | formatDate}}
+        <span v-text='apple'></span>
+        <span v-html='banana'></span>
+        <div v-bind:class ='className'>test</div>
+        <div>点击数字</div>
+        <button v-on:click='count(5)'>{{countnum}}</button>
+    </div>
+    <script>
+        function plusDate(value){
+            return value < 10 ? '0'+value : value
+        }
+        // 实时显示时间
+        var app = new Vue({
+            el: '.app',
+            data: {
+               date: new Date(),
+               apple:'苹果',
+               banana:'<span style="color: yellow;">香蕉</span>',
+               className: 'red',
+               countnum:0
+            },
+            filters: {
+                formatDate: function(value){
+                    var date = new Date(value)
+                    var year = date.getFullYear()
+                    var month = plusDate(date.getMonth() + 1)
+                    var day = plusDate(date.getDate())
+                    var hour = plusDate(date.getHours())
+                    var mintue = plusDate(date.getMinutes())
+                    var sec = plusDate(date.getSeconds())
+                    return year + '-' + month + '-' + day + ' ' + hour + ':' + mintue + ':' + sec
+
+                }
+
+            },
+            methods: {
+                count: function(count){
+                    count = count||1
+                    this.countnum += count
+                }
+            },
+            created: function(){
+                alert('尚未挂载')
+            },
+            mounted: function(){
+                var _this = this
+                this.timer = setInterval(function(){
+                    _this.date = new Date()
+                },1000)
+            },
+            beforeDestroy: function(){
+                if(this.timer){
+                    clearTimeout(this.timer)
+                }
+               
+            }
+
+        })
+        console.log(app.$data)
+
+    </script>
+</body>
+</html>

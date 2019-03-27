@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <!-- <my-component :name='name' @input='showName'></my-component> -->
+        <my-component :name='name' v-model='name'></my-component>
+        <br>{{name}}
+
+    </div>
+    <script>
+        Vue.component('my-component',{
+            props: ['name'],
+            render: function(createElenent) {
+                debugger
+                var self = this
+                return createElenent('input',{
+                    domProps: {
+                        value: self.name
+                    },
+                    on: {
+                        input: function(event){
+                            debugger
+                            var a = this
+                            self.$emit('input',event.target.value)
+                        }
+                    }
+                })
+
+            }
+
+        })
+        var app = new Vue({
+            el: '.app',
+            data: {
+                name: '请输入'
+            },
+            methods: {
+                // showName: function(value){
+                //     this.name = value
+                    
+                // }
+            }
+        })
+    </script>
+    
+</body>
+</html>

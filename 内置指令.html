@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style>
+        /* [v-cloak]:{
+            display: none;
+        } */
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <p v-cloak>{{msg}}</p>
+        v-once: 
+        <span v-once>{{oncedata}}</span>
+        <br>
+        <div v-if = 'type === "name"'>
+            姓名：<input type="text" placeholder="请输入姓名" key='name'>
+        </div>
+        <div v-else>
+            密码：<input type="text" placeholder="请输入密码">
+        </div>
+        <button @click='toggle'>点击切换</button>
+        <!--v-for-->
+        <ul>
+            <li v-for='(vueMth,index) in vueMethods'>{{index}}:{{vueMth.name}}</li>
+        </ul>
+        <ul>
+            <li v-for='(value,key,index) in foods'>{{index}}:{{key}}--{{value}}</li>
+        </ul>
+        <input type="text" v-model='message'>
+        <div>输入的是:{{message}}</div>
+
+
+    </div>
+
+    <script>
+
+        var app = new Vue({
+            el:'.app',
+            data: {
+                msg: 'haha',
+                oncedata: 'xixi',
+                type: 'name',
+                vueMethods: [
+                    {name: 'haha'},
+                    {name: 'xixi'},
+                    {name: 'fufu'}
+                ],
+                foods: {
+                    food1: 'rice',
+                    food2: 'joice',
+                    food3: 'water'
+
+                },
+                message:''
+            },
+            methods: {
+                toggle: function(){
+                    this.type = (this.type === 'name'? 'psd' : 'name')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

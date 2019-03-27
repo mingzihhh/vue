@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="app">
+        <a-component></a-component>
+        <b-component></b-component>
+        <br>
+        <child-component ref='a'></child-component>
+        <div>{{msg}}</div>
+        <br>
+        <button @click='getInfo'>获得子组件信息</button>
+        <div>{{info}}</div>
+    </div>
+    <script>
+        //两个子组件传递信息
+        var app = new Vue({
+            el: '.app',
+            data: {
+                bus: new Vue(),
+                msg:'',
+                info:'未获得信息'
+            },
+            components: {
+                'a-component': {
+                    template: '<div><button @click="sendMsg">点击向b传递信息</button></div>',
+                    data: function () {
+                        return {
+                            msg: 'a组件中的信息'
+                        }
+                    },
+                    methods: {
+                        sendMsg: function(){
+                            this.$root.bus.$emit('hhh',this.msg)
+                        }
+                    }
+                },
+                'b-component': {
+                    template: '',
+                    created: function(){
+                        this.$root.bus.$on('hhh',function(msg){
+                            alert(msg)
+                        })
+                    }
+                },
+                'child-component': {
+                    template: '<div><button @click="changeMsg">点击修改父组件信息</button></div>',
+                    data: function(){
+                        return {
+                            msg: '修改后的信息',
+                            info: '父组件获取的信息'
+                        }
+                    },
+                    methods: {
+                        changeMsg: function(){
+                            this.$parent.msg = this.msg
+                        }
+                    }
+
+                }
+            },
+            methods: {
+                getInfo: function(){
+                    this.info = this.$refs.a.info
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

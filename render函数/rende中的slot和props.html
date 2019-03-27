@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="" id="app">
+        <myslot>
+            <div slot="name1">this is slot</div>
+            <div slot="name2">The position is slot2 </div>
+        </myslot>
+        <button @click='switchShow'>点击切换</button>
+        <mydemo :show='show'></mydemo>
+
+
+    </div>
+    <script>
+        Vue.component('myslot', {
+            render: function (createElement) {
+                var he = createElement('div', {
+                    domProps: {
+                        innerHTML: 'this child div'
+                    }
+                });
+                return createElement('div', [he, this.$slots.name2, this.$slots.name1])
+            }
+        });
+        Vue.component('mydemo',{
+            props:['show'],
+            render: function(createElement){
+               var isShow
+               if(this.show){
+                   isShow = '显示'
+               }else{
+                   isShow = '不显示'
+               }
+               return createElement('div',{
+                   domProps: {
+                       innerText: isShow
+                   }
+               })
+
+            }
+
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                switchShow: function(){
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

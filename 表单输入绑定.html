@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="demo">
+        <div>
+            <input type="text" v-model='msg'>
+            输入：{{msg}}
+        </div>
+        <div>
+            <textarea name="" id="" cols="30" rows="10" v-model='text'></textarea>
+            输入：{{text}}
+        </div>
+        <div>
+            单个单选框：
+            <input type='radio' v-bind:checked='check'><br>
+            多个单选框：
+            柠檬：<input type="radio" name='fruit' value='lemon' v-model='fruits'>
+            苹果：<input type="radio" name='fruit' value='apple' v-model='fruits'>
+            香蕉：<input type="radio" name='fruit' value='banana' v-model='fruits'><br>
+            选中的是:{{fruits}}
+        </div>
+        <div>
+            多个复选框：
+            柠檬：<input type="checkbox" name='fruit' value='lemon' v-model='fruits2'>
+            苹果：<input type="checkbox" name='fruit' value='apple' v-model='fruits2'>
+            香蕉：<input type="checkbox" name='fruit' value='banana' v-model='fruits2'><br>
+            选中的是:{{fruits2.join(' ')}}
+        </div>
+        <div>
+            下拉框：
+            <select name="" id="" v-model='fruits3' multiple>
+                <option value="lemon">lemon</option>
+                <option value="apple">apple</option>
+                <option value="banana">banana</option>
+            </select>
+            选中的是:{{fruits3}}
+
+        </div>
+
+
+
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '.demo',
+            data: {
+                msg: '',
+                text: '',
+                check: true,
+                fruits:'',
+                fruits2:[],
+                fruits3:[]
+
+
+
+            },
+            computed: {
+
+
+            },
+            methods: {
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>

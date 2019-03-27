@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <input type="text" v-model='msg'>
+        <app-component :msg='true'></app-component>
+        <app-component msg='true'></app-component>
+        <!-- <table>
+            <tbody is='app-component'></tbody>
+        </table> -->
+        <button-component></button-component>
+        <button-component></button-component>
+        
+    </div>
+   
+  <script>
+    //   Vue.component('my-component',{
+    //       template: '<div>hhh</div>'
+    //   })
+      var app = new Vue({
+          el: '.app',
+          data:{
+              msg:''
+          },
+          components: {
+                'app-component':{
+                    props:{
+                        msg:''
+                    },
+                    template: '<div>输入内容：{{typeof msg}}</div>'
+                },
+                'button-component':{
+                    template:'<button @click="count++">{{count}}</button>',
+                    data: function(){
+                        return {
+                            count: 0
+                        }
+                    }
+                }
+          }
+      })
+  </script>
+    
+</body>
+</html>

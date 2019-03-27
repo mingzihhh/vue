@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="app">
+        <!-- prop 作为需要被转变的原始值传入,用计算属性 -->
+        <input type="text" v-model='msg'>
+        <app-component :msg='msg'></app-component>
+        <!-- 父组件传递初始值进来，子组件将它作为初始值保存起来，在自己的作用域
+        下可以随意使用和修改。 -->
+        <button-component init-count='666'></button-component>
+        <valid-component :a='a' :b='b' :c='c'></valid-component>
+
+    </div>
+
+    <script>
+        //   Vue.component('my-component',{
+        //       template: '<div>hhh</div>'
+        //   })
+        var app = new Vue({
+            el: '.app',
+            data: {
+                msg: '',
+                a: 'hhh',
+                b: '123',
+                c: ''
+            },
+            components: {
+                'app-component': {
+                    props: ['msg'],
+                    template: '<div :style="style">输入内容：{{msg}}</div>',
+                    computed: {
+                        style: function(){
+                            return {
+                                width: this.msg + 'px',
+                                height: '100px',
+                                background: 'red'
+                            }
+                        }
+                    }
+                },
+                'button-component': {
+                    props: ['init-count'],
+                    template: '<button @click="count++">{{count}}</button>',
+                    data: function () {
+                        return {
+                            count: this.initCount
+                        }
+                    }
+                },
+                'valid-component': {
+                    props: {
+                        a: String,
+                        b: {String , Number},
+                        c: {
+                            type: Boolean,
+                            default: true,
+                            required: true
+                        }
+                    },
+                    template: '<div>{{a}}---{{b}}---{{c}}</div>'
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

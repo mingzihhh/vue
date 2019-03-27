@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <div>您的银行卡余额为：{{total}}</div>
+        <!-- <btn-component @change='handleTotal'></btn-component> -->
+        <btn-component v-model='total'></btn-component>
+    </div>
+    <script>
+        // var app = new Vue({
+        //     el: '.app',
+        //     data: {
+        //         total: 2000
+        //     },
+        //     components: {
+        //         'btn-component': {
+        //             template: '<div><button @click="countAdd">+1000</button>\
+        //                     <button @click="countReduce">-1000</button></div>',
+        //             data: function(){
+        //                 return {
+        //                     count: 2000
+        //                 }
+        //             },
+        //             methods: {
+        //                 countAdd: function(){
+        //                     this.count += 1000
+        //                     this.$emit('change',this.count)
+        //                 },
+        //                 countReduce: function(){
+        //                     this.count = (this.count - 1000 > 0) ? this.count - 1000 : 0
+        //                     this.$emit('change',this.count)
+        //                 }
+        //             }
+        //         }
+        //     },
+        //     methods: {
+        //         handleTotal: function(total){
+        //             this.total = total
+        //         }
+        //     }
+
+        // })
+        var app = new Vue({
+            el: '.app',
+            data: {
+                total: 2000
+            },
+            components: {
+                'btn-component': {
+                    template: '<div><button @click="countAdd">+1000</button>\
+                            <button @click="countReduce">-1000</button></div>',
+                    data: function(){
+                        return {
+                            count: 2000
+                        }
+                    },
+                    methods: {
+                        countAdd: function(){
+                            this.count += 1000
+                            this.$emit('input',this.count)
+                        },
+                        countReduce: function(){
+                            this.count = (this.count - 1000 > 0) ? this.count - 1000 : 0
+                            this.$emit('input',this.count)
+                        }
+                    }
+                }
+            },
+            methods: {
+            }
+
+    })
+
+    </script>
+</body>
+</html>

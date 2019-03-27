@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <slot-component>
+            {{msg}}
+        </slot-component>
+        <my-component>
+            <p slot='my' slot-scope='test'>
+                {{test.msg}}
+                {{test.sss}}
+            </p>
+        </my-component>
+        <name-component>
+            <p slot='content'>我是内容</p>
+        </name-component>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '.app',
+            data: {
+                msg: 'asddw'
+            },
+            components: {
+                'slot-component': {
+                    template: '<div><slot>默认</slot></div>'
+                },
+                'my-component':{
+                    template: `<div>
+                    <slot name='my' msg='haha' sss='ssss'></slot>
+                    </div>`,
+
+                },
+                'name-component': {
+                    template: `<div>
+                    <slot name='content'></slot>
+                    </div>`,
+                     mounted: function(){
+                        var msg = this.$slots.content[0].elm.innerText
+                        console.log(msg)
+                    }
+
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

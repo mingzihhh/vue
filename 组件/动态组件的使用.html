@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="app">
+        <component :is='thisCom'></component>
+        <button @click='handleCom("A")'>A</button>
+        <button @click='handleCom("B")'>B</button>
+        <button @click='handleCom("C")'>C</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '.app',
+            data: {
+                thisCom: 'comA'
+            },
+            components: {
+                'comA': {
+                    template: '<div>A组件</div>'
+                },
+                'comB': {
+                    template: `<div>B组件</div>`,
+                },
+                'comC': {
+                    template: `<div>C组件</div>`,
+                }
+            },
+            methods: {
+                handleCom: function(val){
+                    this.thisCom = 'com' + val
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
